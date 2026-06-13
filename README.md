@@ -52,7 +52,7 @@ This is what the HTML file provides:
 - MMScore       - The Mod Meta Score indicating the level of modding (see below for further explanations)
 - Mod-Sets      - applied (black) or recommended (red) mod-sets for this char
 - Mod-Slots     - if this field is black: Speed of this mod, number of rolls (improvements) on speed, mod-set of this mod, primary attribute of this mod, one or more "+" for any secondary attribute of this mod that matches the primary attribute and one or more "*" for any secondary attribute of this mod that matches on of the mod-sets.
-- Mod-Slots    - if this field is read: The mod does not reflect the current Meta, this is the recommended primary attribute for this mod
+- Mod-Slots    - if this field is red: The mod does not reflect the current Meta, this is the recommended primary attribute for this mod
 - Mod Slots    - if this field is written in bold: The mod has a rarity of 6*
 
 And now let's take Rey (Jedi Training) as another example:
