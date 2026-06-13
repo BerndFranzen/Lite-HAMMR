@@ -55,7 +55,7 @@ This is what the HTML file provides:
 - Mod-Slots    - if this field is red: The mod does not reflect the current Meta, this is the recommended primary attribute for this mod
 - Mod Slots    - if this field is written in bold: The mod has a rarity of 6*
 
-And now let's have a closer look on some characters:
+And now let's have a closer look on some characters, so you know what actions you have to take on your characters to make the results look better (and your teams perform better)
 
 * Jedi Master Kenobi
   - has got a full MMScore of 150, what means that
@@ -66,11 +66,17 @@ And now let's have a closer look on some characters:
   - all mods that have a speed secondary attribute have been calibrated to that a total of (5) times speed has been added.
 * Ahsoka Tano
   - has got a full MMScore of 150, but:
-    - the MMSCore only matches the (A)ll meta, not the Top-100 guilds
+    - the MMScore only matches the (A)ll meta, not the Top-100 guilds
 * Rey
   - only has an MMScore of 80, because:
     - the mod applied on the Receiver slot does currently not follow the Meta and should have either Health or Speed as primary attribute
     - several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls
+* Darth Vader
+  - only has an MMScore of 30, because:
+    - the mod sets applied overall do currently not follow the Meta and should be Critical Damage and Potency
+    - the mods applied on 4 slots either do not have the right primary attributes or are not from a Critical Damage mod set
+   
+So, that gives me lists of characters to work on so that the actual mods applied reflect what is recommended through the Meta.
 
 PREREQUISITES
 =============
