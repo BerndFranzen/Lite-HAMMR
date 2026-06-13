@@ -36,26 +36,12 @@ How to start
 
    <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/24e15b5d-2791-4c8f-9d04-c71075d1346c" />
 
-
-
-How to start as a guild
-=======================
-Additionally, after following the steps above:
-1) In the Config-Accounts.csv set the GuildMode value for your allycode to "true"
-2) In th Config-Teams.csv file se the IsGuildTeam value to "true" for alle teams that you want to have analyzed for your entire guild
-3) Start the script in Microsoft Powershell 6.2.0 or higher.
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/c4f8e438-4738-432d-9044-744742f6e815)
-
-What information will you get as a player?
-==========================================
-Basically the tool will drop 3 HTML files with your player name:
+What information will you get?
+==============================
+Basically the tool will drop a single HTML file with your player name:
 - Chars     - listing all chars that you have and that have been leveled to Lvl 50 or higher
 ![image](https://github.com/user-attachments/assets/df0a12a9-b2ae-4ee7-be80-f00cf3061ce4)
-- Teams     - showing the chars grouped in squads that can match the squads you defined within the game
-![image](https://github.com/user-attachments/assets/de15e6e1-b12d-4a44-82d5-fb16fd6d8bbf)
-- Teams-3v3 - showing you the teams you built for 3v3 GA (if any have been specified)
-![image](https://github.com/user-attachments/assets/a9c1426f-a509-4a95-a199-0f54ac9451aa)
-- GAC Oppenents : Once the script detects a new GAC bracket it will load the opponent's data automatically and created the 3 files mentioned above for each opponent in a separate subdirectory "GAC Opponents".
+
 
 What does that data mean for me?
 =================================
@@ -82,38 +68,14 @@ And now let's take Rey (Jedi Training) as another example:
 The MMScore is below 100, and followed by "(A)" thus showing us that I missed something. First, the mod score was higher when comparing against the overall list but not the Top 100. On the Holo-Array the mod is written in red/italic, showing us that I do not have the suggestes primary applied or the mod doesn't have any speed secondary on it. So now I have to go into the game and see if I can find a suitable mod.
 Additionally, several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls.
 
-What additional information will you get as a guild?
-====================================================
-For each guild, all data will be stored in a subdirectory with the guild's name:
-- Guild-Members - Summary for the entire guild
-  - Name and GM of each player
-  - Number of Galactic Legends
-  - Average MMScore (calculated over all characters having one or more mods assigned)
-  - Average Speed-Bonus through mods (calculated over all characters having one or more mods assigned)
-  - MMSpeed+ - Average of MMScore and Speed-Bonus
-  - Grand Arena Position
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/b9547e97-0b48-40a0-a722-4aaeea984294)
-- Member-(Name)-Chars - listing all chars of that meber that have been leveled to Lvl 50 or higher
-- Member-(Name)-Teams - listing all guild-teams of that member 
-- Team-(Name) - showing a summary for each team defined as well as detailed information about the team for each guild member. The summary contains the following information:
-  - Overall gear level of the team indicated by the lowest-geared character
-  - Average Speed and MMScore of the team
-  - Gear level, Speed and MMScore of each character in the team
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/51beed50-153a-42ef-a8b7-45c857b88935)
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/ce1c549b-0da1-46bb-a74a-0661915184de)
-- Galactic Legends - Summary of all Galactic Legends that exist within the guild
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/23cba134-cd3a-4c83-8220-3e0b9bbe9174)
-- History - During the first run of the tool every month, guild summary and team analysis is stored in the History subdirectory prepended by the current year and month so you can track guild progress on a month-over month basis.
-
 PREREQUISITES
 =============
 - Microsoft Powershell 6.2.0 or higher (Windows, Mac, Linux) (https://aka.ms/PSWindows)
 - PSParseHTML Powershell Module (by EvotecIT), installed automatically if not present 
 - Your allycode registered and synched on swgoh.gg
-- Your allycode(s) updated in the CONFIG-Accounts.csv file
 
-MMSCore and MMSpd+
-==================
+MMSCore
+=======
 NOTE: There is no absolute truth in modding, this tool just compares the mods to the current meta. You my find it usefull to mod a character differently for another game mode (JKL for example) or as it takes a different role in the squad that you play it in. This is only a SUGGESTION! But what is NOT NEGOTIATBLE is speed, this why I added MMSpd+ which takes both, the MMScore and the Speed Bonus a character gets through mods and builds the average of it.
 
 What is the MMScore? the MMScore is intended to help you to learn from the best. It pulls all data from swgoh.gg' Mod Meta Report and compares the character's mods against this meta list and calculates the score as follows:
@@ -153,32 +115,9 @@ Mail      swgoh-guildstats@outlook.com
 
 Q&A
 ===
-Q: How can I create custom teams?
-
-A: Just edit the CONIFG-Teams.csv file and add whatever you want to have an analysis for. You need to add the DefId as specified in 
-   the game itself.
-
-
-
-Q: How do I know what is the DefId for a certain char?
-
-A: On each run, the script will create a file called GAME-NameMapping.htm that shows the display name and the corresponding
-   DefId of each character and ship
-
-
-Q: In the CONFIG-Accounts.csv there are 2 allycodes, do I have to provide 2 allycodes as well?
-
-A: No, that's only required if you're also doing statistics for a partner or want to find out more about your current GA opponent.
-
-
 Q: Why does an MMScore of a character drop although I modded according to the recommendations?
 
 A: Because it's Meta and this is constantly changing so you may need to re-mod from time to time.
-
-
-Q: Speed, speed, speed, but what about characters like Merrin that do not take speed from their mods?
-
-A: That's what we implemented "Need4Speed" for, the corresponding config file contains those characters that don't need speed on their mods so having 0 speed on them will not turn down their MMSCore.
 
 
 Q: When I try to run the script on Windows I get an error preventing the execution because it's not signed.
