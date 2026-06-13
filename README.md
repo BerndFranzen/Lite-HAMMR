@@ -19,7 +19,7 @@ B: Sure, it's  often the mods, so as I said, they may not be good enough.
 A: But then I need to know: How Are My Mods Really?
 
 
-This is where Lite-HAMMR (How Are My Mods Really) my be helpful to you. This tool crawls through your SWGOH roster and shows you all your characters with their gear, power and how they are / should be modded.
+This is where Lite-HAMMR (How Are My Mods Really) may be helpful to you. This tool crawls through your SWGOH roster and shows you all your characters with their gear, power and how they are / should be modded.
 
 Looking for his big brother that also let's you configure your teams like you play them or get consolidated data for your entire guild?
 https://github.com/BerndFranzen/Mod-HAMMR
