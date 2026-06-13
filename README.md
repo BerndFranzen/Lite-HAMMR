@@ -55,11 +55,10 @@ This is what the HTML file provides:
 - Mod-Slots    - if this field is red: The mod does not reflect the current Meta, this is the recommended primary attribute for this mod
 - Mod Slots    - if this field is written in bold: The mod has a rarity of 6*
 
-And now let's take Rey (Jedi Training) as another example:
+And now let's have a closer look on some characters:
 
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/79690d78-16ba-48dd-ad1a-ceb4a3ff5d43)
-
-The MMScore is below 100, and followed by "(A)" thus showing us that I missed something. First, the mod score was higher when comparing against the overall list but not the Top 100. On the Holo-Array the mod is written in red/italic, showing us that I do not have the suggestes primary applied or the mod doesn't have any speed secondary on it. So now I have to go into the game and see if I can find a suitable mod.
+* Jedi Master Kenobi - He's got a full MMScore of 150, what means that
+  - is below 100, and followed by "(A)" thus showing us that I missed something. First, the mod score was higher when comparing against the overall list but not the Top 100. On the Holo-Array the mod is written in red/italic, showing us that I do not have the suggestes primary applied or the mod doesn't have any speed secondary on it. So now I have to go into the game and see if I can find a suitable mod.
 Additionally, several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls.
 
 PREREQUISITES
