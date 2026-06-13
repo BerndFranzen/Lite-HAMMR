@@ -57,7 +57,12 @@ This is what the HTML file provides:
 
 And now let's have a closer look on some characters:
 
-* Jedi Master Kenobi - He's got a full MMScore of 150, what means that
+* Jedi Master Kenobi
+  - He's got a full MMScore of 150, what means that
+    - the mod sets applied match the meta
+    - all mods applied have a primary that matches the eta
+    - all mods have speed either as primary or secondary attribute
+  - 
   - is below 100, and followed by "(A)" thus showing us that I missed something. First, the mod score was higher when comparing against the overall list but not the Top 100. On the Holo-Array the mod is written in red/italic, showing us that I do not have the suggestes primary applied or the mod doesn't have any speed secondary on it. So now I have to go into the game and see if I can find a suitable mod.
 Additionally, several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls.
 
