@@ -20,16 +20,14 @@ B: Sure, it's  often the mods, so as I said, they may not be good enough.
 A: But then I need to know: How Are My Mods Really?
 
 
-This is where Lite-HAMMR (How Are My Mods Really) my be helpful to you. This tool crawls through your SWGOH roster and shows you:
-- All your characters with their gear, power and how they are / should be modded
-- Freely customizeable squads that reflect your squad selection within the game, helping you to keep focus und which chars to improve next
-- Analysis for yourself and your entire guild (if required)
+This is where Lite-HAMMR (How Are My Mods Really) my be helpful to you. This tool crawls through your SWGOH roster and shows you all your characters with their gear, power and how they are / should be modded
+
 
 How to start
 ============
-1) Make sure, you have Powershell 6.20 or higher installed (Windows, Mac, Linux) (https://aka.ms/PSWindows)
+1) Make sure, you have Microsoft Powershell 7.00 or higher installed (Windows, Mac, Linux) (https://aka.ms/PSWindows)
 2) Download Lite-HAMMR.ps1 to your Windows/Mac/Linux machine:
-3) Unblock the PS1 file with "Unblock-File .\Mod-HAMMR.ps1"
+3) Unblock the PS1 file with "Unblock-File .\Lite-HAMMR.ps1"
 4) Have your SWGOH allycode ready (e.g. 832123322)
 5) Start the script in Microsoft Powershell 6.2.0 or higher like this:
     .\Lite-HAMMR.ps1 832123322
