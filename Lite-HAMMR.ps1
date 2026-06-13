@@ -1,6 +1,6 @@
 <#
 
-    SWGOH Mod-HAMMR Lite Build 26-16 (c)2026 SuperSix/Schattenlegion
+    SWGOH Mod-HAMMR Lite Build 26-24 (c)2026 SuperSix/Schattenlegion
 
 #>
 
@@ -14,14 +14,18 @@ Bugfixes
 
 - 
 
-Known Issues
-
-- None
-
-
 #>
 
 # CSS for output table form
+
+param(
+    [Parameter(Mandatory = $true)]
+    [ValidateScript({
+        if ($_ -match '^\d{9}$') { $true }
+        else { throw "Please provide a valid allycode (e.g. 832123322)."}
+    })]
+    [string]$AllyCode
+)
 
 $header = @"
 <style>
@@ -92,21 +96,16 @@ function CheckPrerequisites() {
 
 }
 
+
 # Define static data
 
 $ModSetShort = ("","HE","OF","DE","SP","CC","CD","PO","TE")
 $ModSetLong = ("","Health","Offense","Defense","Speed","Critical Chance","Critical Damage","Potency","Tenacity") 
 $SlotNameList = ("","","Transmitter","Receiver","Processor","Holo-Array","Data-Bus","Multiplexer")
 $ModMetaUrlList = ("https://swgoh.gg/stats/mod-meta-report/all/","https://swgoh.gg/stats/mod-meta-report/guilds_100_gp/")
-$VersionString = "SWGOH Mod-HAMMR Lite Build 26-16 (c)2026 SuperSix/Schatten-Legion"
+$VersionString = "SWGOH Mod-HAMMR Lite Build 26-24 (c)2026 SuperSix/Schatten-Legion"
 
 CheckPrerequisites
-
-
-# Load and format mod meta data
-
-
-$Account = "832123322"
 
 $ModMetaModeList = ("Strict","Relaxed")
 
@@ -114,12 +113,13 @@ $ModMetaModeList = ("Strict","Relaxed")
 
 Write-Host "Calculating statistics for " -foregroundcolor green -NoNewline
 
-$RosterInfo = (Invoke-WebRequest ("http://swgoh.gg/api/player/" + $Account) -Headers $RequestHeader -HttpVersion "2.0" -ErrorAction SilentlyContinue).Content | ConvertFrom-Json
+$RosterInfo = (Invoke-WebRequest ("http://swgoh.gg/api/player/" + $AllyCode) -Headers $RequestHeader -HttpVersion "2.0" -ErrorAction SilentlyContinue).Content | ConvertFrom-Json
 
 Write-Host $RosterInfo.data.name, "" -foregroundcolor blue -NoNewline
 Write-Host $RosterInfo.data.last_updated -ForegroundColor DarkGray
 
 Write-Host "Loading support data" -ForegroundColor Green
+
 
 $MetaHash = @{}
 
@@ -188,7 +188,7 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
     }
 }
 
-$ModTeamObj=[ordered]@{Name="";RawName="";"Power"=0;"Gear"="";"RawGear"="";"Speed"="";"RawSpeed"=0;"RawSpd+"=0;"RawEquippedModCount"=0;"MMScore"=0;"RawMMScore"="";"Mod-Sets"="";"Transmitter"="";"Receiver"="";"Processor"="";"Holo-Array"="";"Data-Bus"="";"Multiplexer"=""}
+$ModTeamObj=[ordered]@{Name="";"Power"=0;"Gear"="";"Speed"="";"MMScore"=0;"Mod-Sets"="";"Transmitter"="";"Receiver"="";"Processor"="";"Holo-Array"="";"Data-Bus"="";"Multiplexer"=""}
 
 # Start player analysis
 
@@ -213,13 +213,10 @@ $ModRosterInfo = $RosterInfo.Units.Data | Where-Object {($_.combat_type -eq 1) -
 
 $ModTeam = New-Object PSObject -Property $ModTeamObj
 
-
 ForEach ($Char in $ModRosterInfo) {
 
     $ModTeam.Name = $Char.Name
-    $ModTeam.RawSpeed = $Char.stats.5
     $ModTeam.Speed = "{0:0} ({1:0})" -f $Char.stats.5,$Char.stat_diffs.5 
-    $ModTeam."RawSpd+" = $Char.stat_diffs.5
     $ModTeam.Power = $Char.power
 
     if ($Char.relic_tier -gt 2) {
@@ -238,14 +235,9 @@ ForEach ($Char in $ModRosterInfo) {
 
     }
 
-    $ModTeam.RawGear = $ModTeam.Gear
-    $ModTeam.RawName = $ModTeam.Name
-    
     $FinalMMScore = 0;
     $EquippedModsets = $Char.mod_set_ids
     $EquippedMods = $ModHash[$Char.base_id]
-
-    $ModTeam.RawEquippedModCount = $EquippedMods.count
 
     ForEach($ModMetaMode in $ModMetaModeList) {
 
@@ -354,20 +346,14 @@ ForEach ($Char in $ModRosterInfo) {
                     $FinalModTeam = ($ModTeam).psobject.copy()
                     $FinalMMScore = $MMScore                    
                     
-                } elseif ($ModMetaMode -like "Custom" -and $ModTeam.MMScore -gt $FinalModTeam.MMScore) {
-
-                    $ModTeam.MMScore = [string]$ModTeam.MMScore + " (C)"
-                    $FinalModTeam = ($ModTeam).psobject.copy()
-                    $FinalMMScore = $MMScore
-
-                }
+                } 
             }
         
         }
 
     }
 
-    $FinalModTeam.RawMMScore = $FinalMMScore
+    
     if ($FinalMMscore -ge 130) {$FinalModTeam.MMScore = "BOLD" + $FinalModTeam.MMScore}
 
     $ModRoster = $ModRoster + $FinalModTeam
@@ -377,5 +363,5 @@ ForEach ($Char in $ModRosterInfo) {
 
 $ModRoster = $ModRoster | Sort-Object @{Expression="Power"; Descending=$true}
 
-($ModRoster | Select-Object -ExcludeProperty Raw* | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + "-Chars.htm" ) -Encoding unicode -ErrorAction SilentlyContinue
+($ModRoster | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + ".htm" ) -Encoding unicode -ErrorAction SilentlyContinue
 
