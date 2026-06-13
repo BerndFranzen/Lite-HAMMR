@@ -66,12 +66,11 @@ And now let's have a closer look on some characters:
   - all mods that have a speed secondary attribute have been calibrated to that a total of (5) times speed has been added.
 * Ahsoka Tano
   - has got a full MMScore of 150, but:
-    - the MMSCore only matches the (A)ll meta, not the Top-100 guilds 
-
-
-
-
-Additionally, several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls.
+    - the MMSCore only matches the (A)ll meta, not the Top-100 guilds
+* Rey
+  - only has an MMScore of 80, because:
+    - the mod applied on the Receiver slot does currently not follow the Meta and should have either Health or Speed as primary attribute
+    - several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls
 
 PREREQUISITES
 =============
