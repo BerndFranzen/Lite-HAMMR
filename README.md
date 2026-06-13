@@ -40,7 +40,10 @@ What information will you get?
 ==============================
 Basically the tool will drop a single HTML file with your player name:
 - Chars     - listing all chars that you have and that have been leveled to Lvl 50 or higher
-![image](https://github.com/user-attachments/assets/df0a12a9-b2ae-4ee7-be80-f00cf3061ce4)
+
+
+
+
 
 
 What does that data mean for me?
