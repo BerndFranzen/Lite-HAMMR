@@ -72,7 +72,7 @@ And now let's have a closer look on some characters, so you know what actions yo
 * Rey
   - only has an MMScore of 80, because:
     - the mod applied on the Receiver slot does currently not follow the Meta and should have either Health or Speed as primary attribute
-    - several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls
+  - several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls
 * Darth Vader
   - only has an MMScore of 30, because:
     - the mod sets applied overall do currently not follow the Meta and should be Critical Damage and Potency
