@@ -57,7 +57,7 @@ This is what the HTML file provides:
 - Mod-Slots    - if this field is red: The mod does not reflect the current Meta, this is the recommended primary attribute for this mod
 - Mod Slots    - if this field is written in bold: The mod has a rarity of 6*
 
-And now let's have a closer look on some characters, so you know what actions you have to take on your characters to make the results look better (and your teams perform better)
+And now let's have a closer look on some characters, so you know what actions you have to take to make the results look better (and your teams perform better)
 
 * Jedi Master Kenobi
   - has got a full MMScore of 150, what means that
