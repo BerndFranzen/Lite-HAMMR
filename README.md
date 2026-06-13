@@ -44,6 +44,8 @@ Basically the tool will drop a single HTML file with your player name:
 
 <img width="2215" height="1267" alt="image" src="https://github.com/user-attachments/assets/ca51d92a-d186-48c3-b214-9d0c470be0ea" />
 
+<img width="2221" height="1715" alt="image" src="https://github.com/user-attachments/assets/ba0c54ad-8eb4-4f83-81c4-651f3a600f63" />
+
 
 What does that data mean for me?
 =================================
