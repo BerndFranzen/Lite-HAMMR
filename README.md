@@ -38,7 +38,6 @@ How to start
 What information will you get?
 ==============================
 Basically the tool will drop a single HTML file with your player name:
-- Chars     - listing all chars that you have and that have been leveled to Lvl 50 or higher
 
 <img width="2221" height="1715" alt="image" src="https://github.com/user-attachments/assets/ba0c54ad-8eb4-4f83-81c4-651f3a600f63" />
 
