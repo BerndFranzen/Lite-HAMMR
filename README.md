@@ -2,6 +2,9 @@
 
 The Lite version of Mod-HAMMR, stripped down to it's initial meaning of just showing what mods are or should be deployed on your chars.
 
+Looking for his big brother that also let's you configure your teams like you play them or get consolidated data for your entire guild?
+https://github.com/BerndFranzen/Mod-HAMMR
+
 
 Standard conversation that you will hear between SWGOH players each an every day:
 
@@ -80,7 +83,7 @@ So, that gives me lists of characters to work on so that the actual mods applied
 
 PREREQUISITES
 =============
-- Microsoft Powershell 6.2.0 or higher (Windows, Mac, Linux) (https://aka.ms/PSWindows)
+- Microsoft Powershell 7.0.0 or higher (Windows, Mac, Linux) (https://aka.ms/PSWindows)
 - PSParseHTML Powershell Module (by EvotecIT), installed automatically if not present 
 - Your allycode registered and synched on swgoh.gg
 
