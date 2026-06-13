@@ -34,8 +34,9 @@ How to start
 5) Start the script in Microsoft Powershell 6.2.0 or higher like this:
     .\Lite-HAMMR.ps1 832123322
 
-   <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/24e15b5d-2791-4c8f-9d04-c71075d1346c" />
+   <img width="1466" height="251" alt="image" src="https://github.com/user-attachments/assets/3887bb42-a433-41a1-bb65-8258c2630f6e" />
 
+ 
 What information will you get?
 ==============================
 Basically the tool will drop a single HTML file with your player name:
