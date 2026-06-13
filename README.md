@@ -48,7 +48,7 @@ This is what the HTML file provides:
 - Name          - The ingame name of the character, this may not reflect the name that you see in your localized version of the game but the API cannot return anythin else.
 - Power         - The total power of this char
 - Gear          - The Gear-level either G01-G13 or R01-R10 for relic chars
-- Speed         - Speed of the character with the bonus given thorugh mods in brackets
+- Speed         - Speed of the character with the bonus given through mods in brackets
 - MMScore       - The Mod Meta Score indicating the level of modding (see below for further explanations)
 - Mod-Sets      - applied (black) or recommended (red/italic) mod-sets for this char
 - Mod-Slot 1-6  - if this field is black: Speed of this mod, number of rolls (improvements) on speed, mod-set of this mod, primary attribute of this mod, one or more "+" for any secondary attribute of this mod that matches the primary attribute and one or more "*" for any secondary attribute of this mod that matches on of the mod-sets.
