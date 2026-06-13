@@ -61,8 +61,8 @@ And now let's have a closer look on some characters, so you know what actions yo
 
 * Jedi Master Kenobi
   - has got a full MMScore of 150, what means that
-    - the mod sets applied match the meta
-    - all mods have a primary that matches the eta
+    - the mod sets applied match the Meta
+    - all mods have a primary that matches the Meta
     - all mods have speed either as primary or secondary attribute
     - all mods have been sliced to 6A
   - all mods that have a speed secondary attribute have been calibrated to that a total of (5) times speed has been added.
