@@ -64,15 +64,13 @@ And now let's have a closer look on some characters:
     - all mods have speed either as primary or secondary attribute
     - all mods have been sliced to 6A
   - all mods that have a speed secondary attribute have been calibrated to that a total of (5) times speed has been added.
-* Jedi Master Kenobi
-  - has got a full MMScore of 150, what means that
-    - the mod sets applied match the meta
-    - all mods have a primary that matches the eta
-    - all mods have speed either as primary or secondary attribute
-    - all mods have been sliced to 6A
-  - all mods that have a speed secondary attribute have been calibrated to that a total of (5) times speed has been added.
-  
-  - is below 100, and followed by "(A)" thus showing us that I missed something. First, the mod score was higher when comparing against the overall list but not the Top 100. On the Holo-Array the mod is written in red/italic, showing us that I do not have the suggestes primary applied or the mod doesn't have any speed secondary on it. So now I have to go into the game and see if I can find a suitable mod.
+* Ahsoka Tano
+  - has got a full MMScore of 150, but:
+    - the MMSCore only matches the (A)ll meta, not the Top-100 guilds 
+
+
+
+
 Additionally, several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls.
 
 PREREQUISITES
