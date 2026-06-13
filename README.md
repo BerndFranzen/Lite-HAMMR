@@ -33,8 +33,10 @@ How to start
 4) Have your SWGOH allycode ready (e.g. 832123322)
 5) Start the script in Microsoft Powershell 6.2.0 or higher like this:
     .\Lite-HAMMR.ps1 832123322
-   
-![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/85dedaec-a6ea-490a-bba0-d48b3292a4d5)
+
+   <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/24e15b5d-2791-4c8f-9d04-c71075d1346c" />
+
+
 
 How to start as a guild
 =======================
