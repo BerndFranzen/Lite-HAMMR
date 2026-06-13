@@ -46,8 +46,7 @@ Basically the tool will drop a single HTML file with your player name:
 
 What does that data mean for me?
 =================================
-Let's take the first line from the sample below for a specific team:
-![image](https://github.com/user-attachments/assets/31f2ebe4-aa9e-47e3-861b-65fc7a9fe5f7)
+This is what the HTML file provides:
 - Name          - The ingame name of the character, this may not reflect the name that you see in your localized version of the game but the API cannot return anythin else.
 - Power         - The total power of this char
 - Gear          - The Gear-level either G01-G13 or R01-R10 for relic chars
