@@ -1,4 +1,4 @@
-# Mod-HAMMR
+# Mod-HAMMR Lite (aka Lite-HAMMR)
 Standard conversation that you will hear between SWGOH players each an every day:
 
 A: 
