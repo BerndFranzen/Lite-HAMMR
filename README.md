@@ -1,4 +1,8 @@
 # Mod-HAMMR Lite (aka Lite-HAMMR)
+
+The Lite version of Mod-HAMMR, stripped down to it's initial meaning of just showing what mods are or should be deployed on your chars.
+
+
 Standard conversation that you will hear between SWGOH players each an every day:
 
 A: 
@@ -16,23 +20,20 @@ B: Sure, it's  often the mods, so as I said, they may not be good enough.
 A: But then I need to know: How Are My Mods Really?
 
 
-This is where Mod-HAMMR (How Are My Mods Really) my be helpful to you. This tool crawls through your SWGOH roster and shows you:
+This is where Lite-HAMMR (How Are My Mods Really) my be helpful to you. This tool crawls through your SWGOH roster and shows you:
 - All your characters with their gear, power and how they are / should be modded
 - Freely customizeable squads that reflect your squad selection within the game, helping you to keep focus und which chars to improve next
 - Analysis for yourself and your entire guild (if required)
 
-How to start as a single player
-===============================
+How to start
+============
 1) Make sure, you have Powershell 6.20 or higher installed (Windows, Mac, Linux) (https://aka.ms/PSWindows)
-2) Download these 3 files to your Windows/Mac/Linux machine:
-- Mod-HAMMR.ps1
-- Config-Accounts.csv
-- Config-Teams.csv
-- Config-Need4Speed.csv
-3) Replace the allycode in the Config-Accounts.csv file with your allycode and chose if you want the script to check your mods in "Strict" or "Relaxed" mode.
-4) Customize the Config-Teams.csv file if needed so that if reflects that squads as you actually play them and set "Is3v3" to "true" for those line you added for 3v3 GA.
-5) Unblock the PS1 file with "Unblock-File .\Mod-HAMMR.ps1" 
-6) Start the script in Microsoft Powershell 6.2.0 or higher.
+2) Download Lite-HAMMR.ps1 to your Windows/Mac/Linux machine:
+3) Unblock the PS1 file with "Unblock-File .\Mod-HAMMR.ps1"
+4) Have your SWGOH allycode ready (e.g. 832123322)
+5) Start the script in Microsoft Powershell 6.2.0 or higher like this:
+    .\Lite-HAMMR.ps1 832123322
+   
 ![image](https://github.com/BerndFranzen/Mod-HAMMR/assets/97521655/85dedaec-a6ea-490a-bba0-d48b3292a4d5)
 
 How to start as a guild
