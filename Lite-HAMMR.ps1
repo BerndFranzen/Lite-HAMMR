@@ -1,6 +1,6 @@
 <#
 
-    SWGOH Mod-HAMMR Lite Build 26-24 (c)2026 SuperSix/Schattenlegion
+    SWGOH Mod-HAMMR Lite Build 26-35 (c)2026 SuperSix
 
 #>
 
@@ -12,7 +12,7 @@ Changes
 
 Bugfixes
 
-- 
+-  Update to process changed Mod Meta presentaion on swgoh.gg
 
 #>
 
@@ -74,28 +74,41 @@ $header = @"
 "@
 
 
-$RequestHeader = @{
-
- "cache-control"="no-cache"
- "x-gg-bot-access"="31a9a"
- "Accept-Encoding" = "gzip, deflate, br"
-
-}
 
 function CheckPrerequisites() {
-    
+
     Clear-Host
-    Write-Host $VersionString  -ForegroundColor Green
-    Write-Host
+    Write-Host $VersionString -ForegroundColor Green -NoNewline
+    Write-Host "",$PSEdition -ForegroundColor DarkGray  
+    Write-Host 
 
     # Check if all prerequisites are met
-
-    if ($PSVersionTable.PSVersion.Major -lt 7) {Write-Host "ERROR - This script requires Microsoft Powershell 7 or higher" -ForegroundColor Red; Break}
+    
     $ParseModule = Get-Module PSParseHTML -ListAvailable -ErrorAction SilentlyContinue
     If ($null -eq $ParseModule) { Install-Module -Name PSParseHTML -AllowClobber -Force }
 
 }
 
+function InvokeWebRequest($URL) {
+
+    if ($PSEdition -eq "Core") {
+
+        $Response = Invoke-WebRequest -Uri $URL -Headers $RequestHeader -HttpVersion "3.0" -ErrorAction SilentlyContinue
+
+    } else {
+
+        $Response = Invoke-WebRequest -Uri $URL -Headers $RequestHeader -ErrorAction SilentlyContinue -UseBasicParsing
+
+    }
+
+    
+    if ($Response.StatusCode -ne 200) {
+        Write-Host "Error: Unable to retrieve data from $URL. Status code: $($Response.StatusCode)" -ForegroundColor Red
+        return $null
+    }
+
+    return $Response.Content | ConvertFrom-Json
+}
 
 # Define static data
 
@@ -103,7 +116,21 @@ $ModSetShort = ("","HE","OF","DE","SP","CC","CD","PO","TE")
 $ModSetLong = ("","Health","Offense","Defense","Speed","Critical Chance","Critical Damage","Potency","Tenacity") 
 $SlotNameList = ("","","Transmitter","Receiver","Processor","Holo-Array","Data-Bus","Multiplexer")
 $ModMetaUrlList = ("https://swgoh.gg/stats/mod-meta-report/all/","https://swgoh.gg/stats/mod-meta-report/guilds_100_gp/")
-$VersionString = "SWGOH Mod-HAMMR Lite Build 26-24 (c)2026 SuperSix/Schatten-Legion"
+$VersionString = "SWGOH Mod-HAMMR Lite Build 26-35 (c)2026 SuperSix"
+
+if ($PSEdition -eq "Core") { 
+
+    $RequestHeader = @{
+        "cache-control"="no-cache"
+        "x-gg-bot-access"="31a9a"
+        "Accept-Encoding" = "gzip, deflate, br"
+    }
+} else {
+    $RequestHeader = @{
+        "cache-control"="no-cache"
+        "x-gg-bot-access"="31a9a"
+    }
+}
 
 CheckPrerequisites
 
@@ -113,8 +140,7 @@ $ModMetaModeList = ("Strict","Relaxed")
 
 Write-Host "Calculating statistics for " -foregroundcolor green -NoNewline
 
-$RosterInfo = (Invoke-WebRequest ("http://swgoh.gg/api/player/" + $AllyCode) -Headers $RequestHeader -HttpVersion "2.0" -ErrorAction SilentlyContinue).Content | ConvertFrom-Json
-
+$RosterInfo = InvokeWebRequest ("http://swgoh.gg/api/player/" + $AllyCode)
 Write-Host $RosterInfo.data.name, "" -foregroundcolor blue -NoNewline
 Write-Host $RosterInfo.data.last_updated -ForegroundColor DarkGray
 
@@ -125,7 +151,20 @@ $MetaHash = @{}
 
 ForEach ($ModMetaUrl in $ModMetaUrlList) {
 
-    $RawMetaInfo = (Invoke-WebRequest $ModMetaUrl -Headers $RequestHeader -HttpVersion "2.0").Content | Optimize-HTML    
+    if ($PSEdition -eq "Core") { 
+
+        $RawMetaInfo = Optimize-HTML -Content (Invoke-WebRequest $ModMetaUrl -Headers $RequestHeader -HttpVersion "3.0").Content
+
+    } else {    
+
+        $Content = (Invoke-WebRequest $ModMetaUrl -Headers $RequestHeader -usebasicparsing).Content
+        $RawMetaInfo = Optimize-HTML -Content $Content
+
+    }
+
+    
+
+ 
     $RawMetaHelperList = $RawMetaInfo.Split('data-unit-def-tooltip-app=')
     $RawMetaHelperList = $RawMetaHelperList[1..($RawMetaHelperList.count -1)]
     $RawMetaHelperHash = @{}
@@ -159,7 +198,7 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
         if ($Searchtarget) {
 
             $RawMetaObject.base_id = $SearchTarget
-            $SetMetaInfo = $RawMetaHelperHash[$SearchTarget].Substring(0,$RawMetaHelperHash[$SearchTarget].IndexOf("</div></div></div></div></div></td>"))  
+            $SetMetaInfo = $RawMetaHelperHash[$SearchTarget].Substring(0,$RawMetaHelperHash[$SearchTarget].IndexOf("</div></div></div></div></div><dl"))  
         
             $SetResults = @()
 
@@ -361,7 +400,7 @@ ForEach ($Char in $ModRosterInfo) {
 
 } # ForEach
 
-$ModRoster = $ModRoster | Sort-Object @{Expression="Power"; Descending=$true}
+$ModRoster = $ModRoster | Sort-Object @{Expression="Power"; Descending=$true},@{Expression="Name"; Descending=$false}
 
 ($ModRoster | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + ".htm" ) -Encoding unicode -ErrorAction SilentlyContinue
 
