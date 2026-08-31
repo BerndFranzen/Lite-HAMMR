@@ -1,6 +1,6 @@
 <#
 
-    SWGOH Mod-HAMMR Lite Build 26-35 (c)2026 SuperSix
+    SWGOH Mod-HAMMR Lite Build 26-36 (c)2026 SuperSix
 
 #>
 
@@ -154,18 +154,21 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
     if ($PSEdition -eq "Core") { 
 
         $RawMetaInfo = Optimize-HTML -Content (Invoke-WebRequest $ModMetaUrl -Headers $RequestHeader -HttpVersion "3.0").Content
+        $RawMetaHelperList = $RawMetaInfo.Split('data-unit-def-tooltip-app=')
+    
 
     } else {    
 
         $Content = (Invoke-WebRequest $ModMetaUrl -Headers $RequestHeader -usebasicparsing).Content
         $RawMetaInfo = Optimize-HTML -Content $Content
 
+        $RawMetaHelperList = $RawMetaInfo.Split(
+            [string[]]@('data-unit-def-tooltip-app='),
+            [System.StringSplitOptions]::None
+        )
+
     }
 
-    
-
- 
-    $RawMetaHelperList = $RawMetaInfo.Split('data-unit-def-tooltip-app=')
     $RawMetaHelperList = $RawMetaHelperList[1..($RawMetaHelperList.count -1)]
     $RawMetaHelperHash = @{}
 
@@ -290,6 +293,8 @@ ForEach ($Char in $ModRosterInfo) {
                 $RequiredModSets = $RequiredMods.Sets
 
                 $ModTeam."Mod-Sets" = $RequiredModSets | Join-String -Separator " / "
+
+
                 
                 if (($RequiredModSets -contains "Offense" -and $EquippedModsets -contains 2) -or ($RequiredModSets -contains "Speed" -and $EquippedModsets -contains 4) -or ($RequiredModSets -contains "Critical Damage" -and $EquippedModsets -contains 6)) {$MMScore += 20}
 
@@ -354,6 +359,12 @@ ForEach ($Char in $ModRosterInfo) {
 
 
                             if ($SelectedMod.rarity -gt 5) {$ModTeam.($Slotname) = "BOLD" + $ModTeam.($Slotname)}
+
+                            if ($SelectedMod.tier -eq 1){ $ModTeam.($Slotname) = "BGIVORY" + $ModTeam.($Slotname) }
+                            if ($SelectedMod.tier -eq 2){ $ModTeam.($Slotname) = "BGGREEN" + $ModTeam.($Slotname) }
+                            if ($SelectedMod.tier -eq 3){ $ModTeam.($Slotname) = "BGBLUE" + $ModTeam.($Slotname) }
+                            if ($SelectedMod.tier -eq 4){ $ModTeam.($Slotname) = "BGVIOLET" + $ModTeam.($Slotname) }
+                            if ($SelectedMod.tier -eq 5){ $ModTeam.($Slotname) = "BGYELLOW" + $ModTeam.($Slotname) }
                                             
                         } else {$ModTeam.($Slotname) = "RED" + ($RequiredPrimaries | Join-String  -Separator (" / ")).Replace("Critical","Crit.")} 
                     } else {$ModTeam.($Slotname) = "RED" + ($RequiredPrimaries | Join-String  -Separator (" / ")).Replace("Critical","Crit.")}
@@ -402,5 +413,5 @@ ForEach ($Char in $ModRosterInfo) {
 
 $ModRoster = $ModRoster | Sort-Object @{Expression="Power"; Descending=$true},@{Expression="Name"; Descending=$false}
 
-($ModRoster | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + ".htm" ) -Encoding unicode -ErrorAction SilentlyContinue
+($ModRoster | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>BGIVORY","<td style='background-color:ivory'>").Replace("<td>BGGREEN","<td style='background-color:lightgreen'>").Replace("<td>BGVIOLET","<td style='background-color:violet'>").Replace("<td>BGYELLOW","<td style='background-color:yellow'>").Replace("<td>BGBLUE","<td style='background-color:skyblue'>").Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + ".htm" ) -Encoding unicode -ErrorAction SilentlyContinue
 
