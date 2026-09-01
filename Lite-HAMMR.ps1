@@ -1,6 +1,6 @@
 <#
 
-    SWGOH Mod-HAMMR Lite Build 26-36 (c)2026 SuperSix
+    SWGOH Mod-HAMMR Lite Build 26-36 (c)2026 SuperSix/The REKoning
 
 #>
 
@@ -116,7 +116,7 @@ $ModSetShort = ("","HE","OF","DE","SP","CC","CD","PO","TE")
 $ModSetLong = ("","Health","Offense","Defense","Speed","Critical Chance","Critical Damage","Potency","Tenacity") 
 $SlotNameList = ("","","Transmitter","Receiver","Processor","Holo-Array","Data-Bus","Multiplexer")
 $ModMetaUrlList = ("https://swgoh.gg/stats/mod-meta-report/all/","https://swgoh.gg/stats/mod-meta-report/guilds_100_gp/")
-$VersionString = "SWGOH Mod-HAMMR Lite Build 26-35 (c)2026 SuperSix"
+$VersionString = "SWGOH Mod-HAMMR Lite Build 26-36 (c)2026 SuperSix/The REKoning"
 
 if ($PSEdition -eq "Core") { 
 
