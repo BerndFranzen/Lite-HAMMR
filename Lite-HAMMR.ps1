@@ -290,9 +290,9 @@ ForEach ($Char in $ModRosterInfo) {
 
             if ($RequiredMods) {
 
-                $RequiredModSets = $RequiredMods.Sets
+                $RequiredModSets = $RequiredMods.Sets | Where-Object {$_ -ne $null}
 
-                $ModTeam."Mod-Sets" = $RequiredModSets | Join-String -Separator " / "
+                $ModTeam."Mod-Sets" = $RequiredModSets -join " / "
 
 
                 
@@ -364,10 +364,10 @@ ForEach ($Char in $ModRosterInfo) {
                             if ($SelectedMod.tier -eq 2){ $ModTeam.($Slotname) = "BGGREEN" + $ModTeam.($Slotname) }
                             if ($SelectedMod.tier -eq 3){ $ModTeam.($Slotname) = "BGBLUE" + $ModTeam.($Slotname) }
                             if ($SelectedMod.tier -eq 4){ $ModTeam.($Slotname) = "BGVIOLET" + $ModTeam.($Slotname) }
-                            if ($SelectedMod.tier -eq 5){ $ModTeam.($Slotname) = "BGYELLOW" + $ModTeam.($Slotname) }
+                            if ($SelectedMod.tier -eq 5){ $ModTeam.($Slotname) = "BGGOLD" + $ModTeam.($Slotname) }
                                             
-                        } else {$ModTeam.($Slotname) = "RED" + ($RequiredPrimaries | Join-String  -Separator (" / ")).Replace("Critical","Crit.")} 
-                    } else {$ModTeam.($Slotname) = "RED" + ($RequiredPrimaries | Join-String  -Separator (" / ")).Replace("Critical","Crit.")}
+                        } else {$ModTeam.($Slotname) = "RED" + ($RequiredPrimaries -join " / ").Replace("Critical","Crit.")} 
+                    } else {$ModTeam.($Slotname) = "RED" + ($RequiredPrimaries -join " / ").Replace("Critical","Crit.")}
 
                 }
                 
@@ -413,5 +413,5 @@ ForEach ($Char in $ModRosterInfo) {
 
 $ModRoster = $ModRoster | Sort-Object @{Expression="Power"; Descending=$true},@{Expression="Name"; Descending=$false}
 
-($ModRoster | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>BGIVORY","<td style='background-color:ivory'>").Replace("<td>BGGREEN","<td style='background-color:lightgreen'>").Replace("<td>BGVIOLET","<td style='background-color:violet'>").Replace("<td>BGYELLOW","<td style='background-color:yellow'>").Replace("<td>BGBLUE","<td style='background-color:skyblue'>").Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + ".htm" ) -Encoding unicode -ErrorAction SilentlyContinue
+($ModRoster | ConvertTo-Html -PreContent ("<H1> <Center>" + $Rosterinfo.data.name + "</H1>") -Head $header ).Replace("<td>BGIVORY","<td style='background-color:ivory'>").Replace("<td>BGGREEN","<td style='background-color:lightgreen'>").Replace("<td>BGVIOLET","<td style='background-color:violet'>").Replace("<td>BGGOLD","<td style='background-color:GOLD'>").Replace("<td>BGBLUE","<td style='background-color:skyblue'>").Replace("<td>RED","<td style='color:red'>").Replace("BOLD","<b>").Replace("Transmitter","Transmitter</br>(Square)").Replace("Receiver","Receiver</br>(Arrow)").Replace("Processor","Processor</br>(Diamond)").Replace("Holo-Array","Holo-Array</br>(Triangle)").Replace("Data-Bus","Data-Bus</br>(Circle)").Replace("Multiplexer","Multiplexer</br>(Cross)") | Out-File ($RosterInfo.data.Name + ".htm" ) -Encoding unicode -ErrorAction SilentlyContinue
 
