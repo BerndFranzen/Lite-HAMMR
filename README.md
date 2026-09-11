@@ -75,6 +75,8 @@ And now let's have a closer look on some characters, so you know what actions yo
   - only has an MMScore of 80, because:
     - the mod applied on the Receiver slot does currently not follow the Meta and should have either Health or Speed as primary attribute
   - several mods only show less than (5) rolls on speed, so I should also see if I can replace them by suitable mods with better speed or calibrate them to get additiona rolls
+* General Skywalker
+  - not all of his mods have yet been sliced to 6A, giving the opportunity of additional speed rolls
 * Darth Vader
   - only has an MMScore of 30, because:
     - the mod sets applied overall do currently not follow the Meta and should be Critical Damage and Potency
@@ -84,8 +86,8 @@ So, that gives me lists of characters to work on so that the actual mods applied
 
 PREREQUISITES
 =============
-- Microsoft Powershell 7.0.0 or higher (Windows, Mac, Linux) (https://aka.ms/PSWindows)
 - PSParseHTML Powershell Module (by EvotecIT), installed automatically if not present 
+- Microsoft Powershell 7.0.0 or higher if running on Mac or Linux (https://aka.ms/PSWindows)
 - Your allycode registered and synched on swgoh.gg
 
 MMSCore
