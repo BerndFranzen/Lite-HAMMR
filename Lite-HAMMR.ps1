@@ -1,6 +1,6 @@
 <#
 
-    SWGOH Mod-HAMMR Lite Build 26-36 (c)2026 SuperSix/The REKoning
+    SWGOH Mod-HAMMR Lite Build 26-37 (c)2026 SuperSix/The REKoning
 
 #>
 
@@ -116,7 +116,7 @@ $ModSetShort = ("","HE","OF","DE","SP","CC","CD","PO","TE")
 $ModSetLong = ("","Health","Offense","Defense","Speed","Critical Chance","Critical Damage","Potency","Tenacity") 
 $SlotNameList = ("","","Transmitter","Receiver","Processor","Holo-Array","Data-Bus","Multiplexer")
 $ModMetaUrlList = ("https://swgoh.gg/stats/mod-meta-report/all/","https://swgoh.gg/stats/mod-meta-report/guilds_100_gp/")
-$VersionString = "SWGOH Mod-HAMMR Lite Build 26-36 (c)2026 SuperSix/The REKoning"
+$VersionString = "SWGOH Mod-HAMMR Lite Build 26-37 (c)2026 SuperSix/The REKoning"
 
 if ($PSEdition -eq "Core") { 
 
@@ -162,10 +162,7 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
         $Content = (Invoke-WebRequest $ModMetaUrl -Headers $RequestHeader -usebasicparsing).Content
         $RawMetaInfo = Optimize-HTML -Content $Content
 
-        $RawMetaHelperList = $RawMetaInfo.Split(
-            [string[]]@('data-unit-def-tooltip-app='),
-            [System.StringSplitOptions]::None
-        )
+        $RawMetaHelperList = $RawMetaInfo.Split([string[]]@('data-unit-def-tooltip-app='),[System.StringSplitOptions]::None)
 
     }
 
@@ -174,11 +171,21 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
 
     ForEach ($RawMetaHelperListEntry in $RawMetaHelperList) {
 
-        $Identifier = $RawMetaHelperListEntry.Split(' ')[0]
+        if ($PSEdition -eq "Core") { 
+
+            $Identifier = ($RawMetaHelperListEntry.Split(' '))[0]
+
+        } else {
+
+            $Identifier = $RawMetaHelperListEntry.Split([string[]]@(' '),[System.StringSplitOptions]::None)[0]
+
+        }
+
+        
         $RawMetaHelperHash[$Identifier] = $RawMetaHelperListEntry
     }
 
-    $RawMetaList = (($RawMetaInfo | ConvertFrom-HtmlTable)) | Where-Object {$_.Receiver -ne ""}
+    $RawMetaList = (ConvertFrom-HtmlTable -Content $RawMetaInfo) | Where-Object {$_.Receiver -ne ""}
     $RawMetaList | Add-Member -Name "base_id" -MemberType NoteProperty -Value ""
 
     If ($ModMetaUrl -like "*guilds_100_gp*") { 
@@ -196,7 +203,15 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
 
         # $SearchTarget = ($UnitsList | Where-Object {$_.name -like $RawMetaObject.Character}).base_id
 
-        $SearchTarget = ($RosterInfo.units.data | Where-Object {$_.name -like $RawMetaObject.Character}).base_id
+        if ($PSEdition -eq "Desktop") { 
+
+            $SearchTarget = (($RosterInfo.units.data) | Where-Object {[Text.Encoding]::UTF8.GetString([Text.Encoding]::GetEncoding(1252).GetBytes($_.name)) -like $RawMetaObject.Character}).base_id
+
+        } else {
+
+            $SearchTarget = (($RosterInfo.units.data) | Where-Object {$_.name -like $RawMetaObject.Character}).base_id
+
+        }
 
         if ($Searchtarget) {
 
@@ -214,11 +229,11 @@ ForEach ($ModMetaUrl in $ModMetaUrlList) {
             $SetResults += ($SetMetaInfo | Select-String "Potency" -AllMatches).matches.Value
             $SetResults += ($SetMetaInfo | Select-String "Tenacity" -AllMatches).matches.Value #>
             
-            $RawMetaObject.Sets = $SetResults
-            $RawMetaObject.Receiver = $RawMetaObject.Receiver.Split(" / ") | Sort-Object
-            $RawMetaObject.Multiplexer = $RawMetaObject.Multiplexer.Split(" / ") | Sort-Object
-            $RawMetaObject."Holo-Array" = $RawMetaObject."Holo-Array".Split(" / ") | Sort-Object
-            $RawMetaObject."Data-Bus" = $RawMetaObject."Data-Bus".Split(" / ") | Sort-Object
+            $RawMetaObject.Sets = $SetResults | Where-Object {$_}
+            $RawMetaObject.Receiver = $RawMetaObject.Receiver.Split([string[]]@(' / '),[System.StringSplitOptions]::None) | Where-Object {$_} | Sort-Object
+            $RawMetaObject.Multiplexer = $RawMetaObject.Multiplexer.Split([string[]]@(' / '),[System.StringSplitOptions]::None) | Where-Object {$_} | Sort-Object
+            $RawMetaObject."Holo-Array" = $RawMetaObject."Holo-Array".Split([string[]]@(' / '),[System.StringSplitOptions]::None) | Where-Object {$_} | Sort-Object
+            $RawMetaObject."Data-Bus" = $RawMetaObject."Data-Bus".Split([string[]]@(' / '),[System.StringSplitOptions]::None) | Where-Object {$_} | Sort-Object
             $RawMetaObjectV2 = @{}
             $RawMetaObjectV2[$RawMetaObject.Mode] = $RawMetaObject | Select-Object -ExcludeProperty Character,Mode,base_id
             $MetaHash[($RawMetaObject.base_id)] += $RawMetaObjectV2 
@@ -257,7 +272,17 @@ $ModTeam = New-Object PSObject -Property $ModTeamObj
 
 ForEach ($Char in $ModRosterInfo) {
 
-    $ModTeam.Name = $Char.Name
+
+    if ($PSEdition -eq "Desktop") { 
+
+        $ModTeam.Name = [Text.Encoding]::UTF8.GetString([Text.Encoding]::GetEncoding(1252).GetBytes($Char.name))
+
+    } else {
+
+        $ModTeam.Name = $Char.name
+
+    }
+
     $ModTeam.Speed = "{0:0} ({1:0})" -f $Char.stats.5,$Char.stat_diffs.5 
     $ModTeam.Power = $Char.power
 
@@ -290,7 +315,7 @@ ForEach ($Char in $ModRosterInfo) {
 
             if ($RequiredMods) {
 
-                $RequiredModSets = $RequiredMods.Sets | Where-Object {$_ -ne $null}
+                $RequiredModSets = $RequiredMods.Sets
 
                 $ModTeam."Mod-Sets" = $RequiredModSets -join " / "
 
