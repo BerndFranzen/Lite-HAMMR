@@ -27,21 +27,21 @@ https://github.com/BerndFranzen/Mod-HAMMR
 
 How to start
 ============
-1) Make sure, you have Microsoft Powershell 7.00 or higher installed (Windows, Mac, Linux) (https://aka.ms/PSWindows)
-2) Download Lite-HAMMR.ps1 to your Windows/Mac/Linux machine:
+1) Download Lite-HAMMR.ps1 to your Windows/Mac/Linux machine
+2) Open a Windows PowerShell or Microsoft PowerShell (Linux, Mac, Windows)
 3) Unblock the PS1 file with "Unblock-File .\Lite-HAMMR.ps1"
 4) Have your SWGOH allycode ready (e.g. 832123322)
-5) Start the script in Microsoft Powershell 7.0.0 or higher like this:
+5) Start the script in Powershell like this:
     **.\Lite-HAMMR.ps1 832123322**
 
-<img width="1466" height="251" alt="image" src="https://github.com/user-attachments/assets/3887bb42-a433-41a1-bb65-8258c2630f6e" />
+<img width="1377" height="241" alt="image" src="https://github.com/user-attachments/assets/f1f99245-9b04-4bf6-a0e2-5205f6a1a04f" />
 
  
 What information will you get?
 ==============================
 Basically the tool will drop a single HTML file with your player name:
 
-<img width="2221" height="1715" alt="image" src="https://github.com/user-attachments/assets/ba0c54ad-8eb4-4f83-81c4-651f3a600f63" />
+<img width="2214" height="628" alt="image" src="https://github.com/user-attachments/assets/04be9b84-7538-47e7-ba9d-f153b9f6221c" />
 
 
 What does that data mean for me?
@@ -54,6 +54,7 @@ This is what the HTML file provides:
 - MMScore       - The Mod Meta Score indicating the level of modding (see below for further explanations)
 - Mod-Sets      - applied (black) or recommended (red) mod-sets for this char
 - Mod-Slots     - if this field is black: Speed of this mod, number of rolls (improvements) on speed, mod-set of this mod, primary attribute of this mod, one or more "+" for any secondary attribute of this mod that matches the primary attribute and one or more "*" for any secondary attribute of this mod that matches on of the mod-sets.
+- Mod-Slots     - the color reflect the rank (E to A) of the mod
 - Mod-Slots    - if this field is red: The mod does not reflect the current Meta, this is the recommended primary attribute for this mod
 - Mod Slots    - if this field is written in bold: The mod has a rarity of 6*
 
