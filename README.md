@@ -34,14 +34,15 @@ How to start
 5) Start the script in Powershell like this:
     **.\Lite-HAMMR.ps1 832123322**
 
-<img width="1377" height="241" alt="image" src="https://github.com/user-attachments/assets/f1f99245-9b04-4bf6-a0e2-5205f6a1a04f" />
+<img width="1387" height="198" alt="image" src="https://github.com/user-attachments/assets/9acc7778-1c71-4e6b-b275-a9f4b7459c32" />
+
 
  
 What information will you get?
 ==============================
 Basically the tool will drop a single HTML file with your player name:
 
-<img width="2214" height="628" alt="image" src="https://github.com/user-attachments/assets/04be9b84-7538-47e7-ba9d-f153b9f6221c" />
+<img width="2207" height="1847" alt="image" src="https://github.com/user-attachments/assets/0b2c5617-124b-478f-871b-6c0ce1a42f9c" />
 
 
 What does that data mean for me?
