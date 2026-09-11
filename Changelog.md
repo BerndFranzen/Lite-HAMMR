@@ -1,4 +1,4 @@
-Version 26-36
+Version 26-37
 
 - addedd support for Windows PowerShell, installation of Microsoft PowerShell no longer required (except for Linux & Mac)
 
